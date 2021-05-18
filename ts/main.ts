@@ -2,7 +2,7 @@ class VideoGame{
     title:string;
     price:number;
     rating:string;
-    online:boolean;
+    isOnline:boolean;
 }
 
 window.onload = function(){
@@ -39,13 +39,35 @@ function getVideoGame():VideoGame{
 
     //Input for if game is online only works with the CheckBox
     let onlineOnly = <HTMLInputElement>document.getElementById("online");
-    game.online = onlineOnly.checked;
+    game.isOnline = onlineOnly.checked;
     //Returns game
     return game;
 }
 
 function displayGame(myGame:VideoGame):void{
-    //TODO: Display video game below the form
+    let displayDiv = document.getElementById("display");
+
+    // Create h2 with game title 
+    let gameHeading = document.createElement("h2");
+    gameHeading.innerText = myGame.title;
+
+    // create paragraph with game details 
+    let gameInfo = document.createElement("p");
+    let notOnlineOnly = "";
+    if(myGame.isOnline){
+        notOnlineOnly = "The game can only be played online"
+    }
+    else{
+        notOnlineOnly = "The game can be played without a internet connection"
+    }
+
+    gameInfo.innerText = `${myGame.title} has a rating of ${myGame.rating} it costs $${myGame.price.toFixed(2)}. ${notOnlineOnly}`;
+    
+
+    // Add h2 in the div 
+    displayDiv.appendChild(gameHeading);
+
+    displayDiv.appendChild(gameInfo)
 }
 
 //ADD VALIDATION CODE
