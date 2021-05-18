@@ -8,11 +8,11 @@ class VideoGame{
 window.onload = function(){
     let addBtn = <HTMLElement>document.querySelector("input[type=button]");
     addBtn.onclick = addVideoGame;
-
 }
 
 //Adds video game to list and displays it 
 function addVideoGame(){
+    resetErrorMessages()
     if(isAllDataValid()){
         let game = getVideoGame();
         displayGame(game);
@@ -72,5 +72,47 @@ function displayGame(myGame:VideoGame):void{
 
 //ADD VALIDATION CODE
 function isAllDataValid(){
+
+
+    let titleInput = <HTMLInputElement>document.getElementById("title");
+    let title = titleInput.value;
+
+
+    if(title == ""){
+        let errorSpan1 = <HTMLSpanElement>document.getElementById("title-span");
+        errorSpan1.innerText = "Please input a title name"
+        return false;
+    }
+
+    let priceInput = <HTMLInputElement>document.getElementById("price");
+    let price = parseFloat(priceInput.value);
+
+    if(price != parseFloat(priceInput.value)){
+        let errorSpan2 = <HTMLSpanElement>document.getElementById("price-span");
+        errorSpan2.innerText = "Please input a price"
+        return false;
+    }
+
+    let ratingInput = <HTMLSelectElement>document.getElementById("rating");
+    let rating = ratingInput.value;
+    if(rating == "Please select a rating"){
+        let errorSpan1 = <HTMLSpanElement>document.getElementById("rating-span");
+        errorSpan1.innerText = "Please input a rating"
+        return false;
+    }
     return true;
+
+}
+
+function resetErrorMessages(): void{
+    let allSpans = document.querySelectorAll("form span");
+    for( let i = 0; i < allSpans.length; i++){
+        let currSpan = <HTMLElement>allSpans[i];
+        if(currSpan.hasAttribute("data-required")){
+            currSpan.innerText = "*"
+        }
+        else{
+            currSpan.innerText ="";
+        }
+    }
 }

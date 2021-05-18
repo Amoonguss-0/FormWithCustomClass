@@ -14,16 +14,16 @@
 <body>
     <h1>Add Video Games</h1>
     <div id="validation-summary">
-        <p>Errors go here...</p>
     </div>
-
     <form>
         <label for="title"> Title:</label>
         <input id="title" type="text">
+        <span data-required id="title-span"></span>
         <br>
 
         <label for="price">Price:</label>
         <input id="price" type="text">
+        <span data-required id="price-span"></span>
         <br>
 
         <label for="rating">Rating:</label>
@@ -35,6 +35,7 @@
             <option>M 17+</option>
             <option>AO 18+</option>
         </select>
+        <span data-required id="rating-span"></span>
         <br>
 
         <label id="online">Online Only?</label>
